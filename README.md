@@ -9,6 +9,9 @@ This project implements a serverless workflow to monitor the health of instances
 * VPC Infrastructure: Established a custom VPC with a 10.x.x.x CIDR block, divided into Public and Private Subnets across multiple Availability Zones (AZs) for high availability.
 * Secure Access: Configured a Bastion Host in the Public Subnet to act as a secure "jump server" for managing resources in the Private Subnet via SSH.
 * Outbound Connectivity: Deployed a NAT Gateway in the Public Subnet, allowing instances in the Private Subnets to securely access the internet (for AI API calls and updates) without exposing them to inbound threats.
+* Traffic Management (ELB): Deployed an Application Load Balancer (ALB) in the public subnets to distribute incoming traffic across a fleet of healthy target instances.
+* Self-Healing (ASG): Configured an Auto Scaling Group to maintain a desired instance count. The ASG automatically replaces unhealthy instances, ensuring 100% application uptime.
+
 
 2. Intelligence Pipeline
 * Detection: Amazon EventBridge captures EC2 state-change events (Stopped/Terminated) triggered by either manual intervention or Auto Scaling Group (ASG) actions.
